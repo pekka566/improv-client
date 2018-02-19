@@ -9,55 +9,56 @@ import Heading from 'grommet/components/Heading';
 import startImage from '../../images/impro_rocks.jpg';
 import './Home.css';
 
-const Home = props => (
-  <div>
-    <Hero
-      background={<Image src={startImage} fit="cover" />}
-      backgroundColorIndex="dark"
-      size="small"
-    >
-      <Box direction="row" justify="center" align="center">
-        <Box basis="1/2" align="end" pad="medium" />
-        <Box basis="1/2" align="start" pad="medium">
-          <Heading margin="none" strong={true} />
-        </Box>
-      </Box>
-    </Hero>
+class Home extends React.Component {
+  componentDidMount() {
+    if (!this.props.loaded) {
+      this.props.fetchExercises();
+    }
+  }
 
-    <Columns masonry={false} size="medium">
-      <Card
-        label="Sample Label"
-        description="Sample description providing more details."
-      />
+  render() {
+    if (!this.props.loaded) {
+      return <Image src={startImage} fit="cover" />;
+    }
 
-      <Card
-        label="Sample Label"
-        description="Sample description providing more details."
-      />
+    const cards = this.props.exercises.map(exercise => {
+      return (
+        <Card
+          key={exercise.id}
+          label={exercise.name}
+          description={<p>{exercise.description}</p>}
+          textSize="small"
+        />
+      );
+    });
 
-      <Card
-        label="Sample Label"
-        description="Sample description providing more details."
-      />
+    return (
+      <div>
+        <Hero
+          background={<Image src={startImage} fit="cover" />}
+          backgroundColorIndex="dark"
+          size="small"
+        >
+          <Box direction="row" justify="between" align="center">
+            <Box basis="1/2" align="end" pad="medium" />
+            <Box basis="1/2" align="start" pad="medium">
+              <Heading margin="none" strong={true} />
+            </Box>
+          </Box>
+        </Hero>
 
-      <Card
-        label="Sample Label"
-        description="Sample description providing more details."
-      />
-
-      <Card
-        label="Sample Label"
-        description="Sample description providing more details."
-      />
-    </Columns>
-    <p>Counter: {props.counter}</p>
-    <button onClick={props.increment}>Increment</button>
-  </div>
-);
+        <Columns masonry={false} size="medium">
+          {cards}
+        </Columns>
+      </div>
+    );
+  }
+}
 
 Home.propTypes = {
-  counter: PropTypes.number.isRequired,
-  increment: PropTypes.func.isRequired
+  fetchExercises: PropTypes.func.isRequired,
+  exercises: PropTypes.array,
+  loaded: PropTypes.bool.isRequired
 };
 
 export default Home;

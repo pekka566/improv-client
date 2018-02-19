@@ -1,19 +1,17 @@
 import { connect } from 'react-redux';
-import {
-  increment,
-  getCounter
-} from '../modules/counter';
+
+import { fetchExercises, getExercises, exercisesLoaded } from '../modules/home';
 
 import Home from '../components/Home';
 
-
 const mapDispatchToProps = {
-  increment: () => increment(1)
+  fetchExercises: () => fetchExercises()
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    counter: getCounter(state)
+    exercises: getExercises(state),
+    loaded: exercisesLoaded(state)
   };
 };
 
