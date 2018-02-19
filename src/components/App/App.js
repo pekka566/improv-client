@@ -9,14 +9,11 @@ import './App.css';
 const App = (props, context) => {
   return (
     <AppComponent>
-      <Header justify="between" className="navbar">
-        <Title>{context.translate('improvTrainings')}</Title>
-        <Menu
-          className="menu"
-          direction="row"
-          align="center"
-          responsive={false}
-        >
+      <Header justify="between" className="navbar" size="small">
+        <Title className="title">
+          <h1>{context.translate('improvTrainings')}</h1>
+        </Title>
+        <Menu className="menu" direction="row" align="center" responsive={true}>
           <a className="grommetux-anchor" href="/" aria-label="Home">
             {context.translate('home')}
           </a>
