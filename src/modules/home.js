@@ -1,8 +1,8 @@
 // ------------------------------------
 // Constants
 
-//const API_URL = 'https://improv-api.herokuapp.com';
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://improv-api.herokuapp.com';
+//const API_URL = 'http://localhost:5000';
 
 const EXERCISES_FETCH_SUCCESS = 'home/EXERCISES_FETCH_SUCCESS';
 const EXERCISES_FETCH_FAILURE = 'home/EXERCISES_FETCH_FAILURE';

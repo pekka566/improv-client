@@ -8,9 +8,21 @@ const mapDispatchToProps = {
   fetchExercises: () => fetchExercises()
 };
 
+const getCategories = exercises => {
+  const categories = [];
+  exercises.forEach(exercise => {
+    if (categories.indexOf(exercise.category) === -1) {
+      categories.push(exercise.category);
+    }
+  });
+  return categories;
+};
+
 const mapStateToProps = state => {
+  const exercises = getExercises(state);
   return {
-    exercises: getExercises(state),
+    exercises,
+    categories: getCategories(exercises),
     loaded: exercisesLoaded(state)
   };
 };

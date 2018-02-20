@@ -5,7 +5,13 @@ import Card from 'grommet/components/Card';
 import Columns from 'grommet/components/Columns';
 import Hero from 'grommet/components/Hero';
 import Box from 'grommet/components/Box';
+import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
+import Form from 'grommet/components/Form';
+import FormFields from 'grommet/components/FormFields';
+import Select from 'grommet/components/Select';
+import Split from 'grommet/components/Split';
+import Section from 'grommet/components/Section';
 import startImage from '../../images/impro_rocks.jpg';
 import './Home.css';
 
@@ -21,6 +27,8 @@ class Home extends React.Component {
       return <Image src={startImage} fit="cover" />;
     }
 
+    console.log(this.props.categories);
+
     const cards = this.props.exercises.map(exercise => {
       return (
         <Card
@@ -31,6 +39,11 @@ class Home extends React.Component {
         />
       );
     });
+
+    const divStyle = {
+      display: 'inline-block',
+      float: 'left'
+    };
 
     return (
       <div>
@@ -46,7 +59,43 @@ class Home extends React.Component {
             </Box>
           </Box>
         </Hero>
-
+        <Split
+          fixed={false}
+          separator={false}
+          showOnResponsive="both"
+          flex="left"
+          style={{ 'margin-top': '10px' }}
+        >
+          <Box justify="center" align="end" pad="none">
+            <Select
+              placeHolder="None"
+              inline={false}
+              multiple={true}
+              onSearch={() => console.log(this)}
+              options={this.props.categories}
+              value=""
+              onChange={() => console.log(this)}
+            />
+          </Box>
+          <Box
+            justify="center"
+            align="end"
+            pad="none"
+            margin="small"
+            basis="full"
+            full="true "
+          >
+            <Button
+              label="Poista filtteri"
+              onClick={() => console.log(this)}
+              critical={false}
+              accent={false}
+              secondary={false}
+              primary={false}
+              plain={true}
+            />
+          </Box>
+        </Split>
         <Columns masonry={false} size="medium">
           {cards}
         </Columns>
@@ -58,6 +107,7 @@ class Home extends React.Component {
 Home.propTypes = {
   fetchExercises: PropTypes.func.isRequired,
   exercises: PropTypes.array,
+  categories: PropTypes.array,
   loaded: PropTypes.bool.isRequired
 };
 
