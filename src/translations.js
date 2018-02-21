@@ -5,7 +5,9 @@ module.exports = {
       about: 'Tietoja',
       contributors: 'Tekijät',
       home: 'Alkuun',
-      improvTrainings: 'Improharjoituksia'
+      improvTrainings: 'Improharjoituksia',
+      musical: 'Musiikki',
+      warmups: 'Lämpät'
     }
   },
   en: {

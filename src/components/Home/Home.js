@@ -7,19 +7,53 @@ import Hero from 'grommet/components/Hero';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
-import Form from 'grommet/components/Form';
-import FormFields from 'grommet/components/FormFields';
 import Select from 'grommet/components/Select';
 import Split from 'grommet/components/Split';
-import Section from 'grommet/components/Section';
 import startImage from '../../images/impro_rocks.jpg';
+import { translateCategory } from '../../containers/HomeContainer';
 import './Home.css';
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { filteredExercises: [], category: '' };
+    this.onChange = this.onChange.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
+  }
+
   componentDidMount() {
     if (!this.props.loaded) {
       this.props.fetchExercises();
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState((prevState, nextProps) => {
+      return {
+        filteredExercises: nextProps.exercises,
+        exercises: nextProps.exercises
+      };
+    });
+  }
+
+  onChange(event) {
+    const exercises = this.state.exercises;
+    const category = event.value;
+    this.setState({
+      category,
+      filteredExercises: exercises.filter(
+        ex => translateCategory(ex.category) === category
+      )
+    });
+  }
+
+  clearFilter() {
+    const exercises = this.state.exercises;
+    const category = '';
+    this.setState({
+      category,
+      filteredExercises: exercises
+    });
   }
 
   render() {
@@ -27,23 +61,21 @@ class Home extends React.Component {
       return <Image src={startImage} fit="cover" />;
     }
 
-    console.log(this.props.categories);
-
-    const cards = this.props.exercises.map(exercise => {
+    const cards = this.state.filteredExercises.map(exercise => {
       return (
         <Card
           key={exercise.id}
           label={exercise.name}
-          description={<p>{exercise.description}</p>}
+          description={
+            <div>
+              <p>{exercise.category}</p>
+              <p>{exercise.description}</p>
+            </div>
+          }
           textSize="small"
         />
       );
     });
-
-    const divStyle = {
-      display: 'inline-block',
-      float: 'left'
-    };
 
     return (
       <div>
@@ -64,17 +96,16 @@ class Home extends React.Component {
           separator={false}
           showOnResponsive="both"
           flex="left"
-          style={{ 'margin-top': '10px' }}
+          style={{ marginTop: '10px' }}
         >
           <Box justify="center" align="end" pad="none">
             <Select
               placeHolder="None"
               inline={false}
-              multiple={true}
-              onSearch={() => console.log(this)}
+              multiple={false}
               options={this.props.categories}
-              value=""
-              onChange={() => console.log(this)}
+              value={this.state.category}
+              onChange={this.onChange}
             />
           </Box>
           <Box
@@ -87,7 +118,7 @@ class Home extends React.Component {
           >
             <Button
               label="Poista filtteri"
-              onClick={() => console.log(this)}
+              onClick={this.clearFilter}
               critical={false}
               accent={false}
               secondary={false}
@@ -109,6 +140,10 @@ Home.propTypes = {
   exercises: PropTypes.array,
   categories: PropTypes.array,
   loaded: PropTypes.bool.isRequired
+};
+
+Home.contextTypes = {
+  translate: PropTypes.func
 };
 
 export default Home;
