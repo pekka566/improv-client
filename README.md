@@ -1,4 +1,4 @@
-#### React Simple Boilerplate
+#### Improv client
 
 This project is done based on [react-simple-boilerplate](https://github.com/gvaldambrini/react-simple-boilerplate)
 
