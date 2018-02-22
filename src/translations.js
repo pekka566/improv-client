@@ -1,4 +1,4 @@
-module.exports = {
+export const translations = {
   fi: {
     locale: 'fi',
     messages: {
@@ -20,3 +20,14 @@ module.exports = {
     }
   }
 };
+
+export const translate = (pkey, pmessages) => {
+  let messages = pmessages;
+  if (!messages) {
+    messages = translations.fi.messages;
+  }
+  const key = Object.keys(messages).find(key => key === pkey);
+  return translations.fi.messages[key];
+};
+
+export default translations;

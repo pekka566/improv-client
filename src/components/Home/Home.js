@@ -10,7 +10,7 @@ import Heading from 'grommet/components/Heading';
 import Select from 'grommet/components/Select';
 import Split from 'grommet/components/Split';
 import startImage from '../../images/impro_rocks.jpg';
-import { translateCategory } from '../../containers/HomeContainer';
+import { translate } from '../../translations';
 import './Home.css';
 
 class Home extends React.Component {
@@ -42,7 +42,7 @@ class Home extends React.Component {
     this.setState({
       category,
       filteredExercises: exercises.filter(
-        ex => translateCategory(ex.category) === category
+        ex => translate(ex.category) === category
       )
     });
   }
@@ -68,8 +68,11 @@ class Home extends React.Component {
           label={exercise.name}
           description={
             <div>
-              <p>{exercise.category}</p>
+              <p>
+                <i>{translate(exercise.category)}</i>
+              </p>
               <p>{exercise.description}</p>
+              <p>{exercise.notice}</p>
             </div>
           }
           textSize="small"
