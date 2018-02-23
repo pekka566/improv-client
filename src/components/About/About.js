@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Box from 'grommet/components/Box';
 
 import './About.css';
 
@@ -28,10 +29,26 @@ class About extends Component {
     ));
 
     return (
-      <div className="About">
-        <h3>{this.context.translate('contributors')}</h3>
-        <div>{contributors}</div>
-      </div>
+      <Box
+        direction="column"
+        justify="start"
+        align="start"
+        wrap={true}
+        pad="none"
+        margin="small"
+      >
+        <Box direction="row" margin="none">
+          <h3>{this.context.translate('contributors')}</h3>
+        </Box>
+        <Box direction="row" margin="none">
+          <Box margin="small">
+            <div className="About">
+              <div>{contributors}</div>
+            </div>
+          </Box>
+          <Box align="start" margin="small" direction="row" />
+        </Box>
+      </Box>
     );
   }
 }
