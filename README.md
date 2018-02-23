@@ -1,3 +1,13 @@
+## Improv client
+
+Is a client for fetching data from improv-api. Live demo: https://improv-client.herokuapp.com/
+
+### Installation
+
+Just
+> yarn
+
+
 #### React Simple Boilerplate
 
 This project is done based on [react-simple-boilerplate](https://github.com/gvaldambrini/react-simple-boilerplate)
