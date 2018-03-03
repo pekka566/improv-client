@@ -9,22 +9,21 @@ const EXERCISES_FETCH_FAILURE = 'home/EXERCISES_FETCH_FAILURE';
 
 // ------------------------------------
 // Action creators
-
-function fetchExercisesSuccess(exercises) {
+const fetchExercisesSuccess = exercises => {
   return {
     type: EXERCISES_FETCH_SUCCESS,
     payload: exercises
   };
-}
+};
 
-function fetchExercisesFailure(errmessage) {
+const fetchExercisesFailure = errmessage => {
   return {
     type: EXERCISES_FETCH_FAILURE,
     payload: errmessage
   };
-}
+};
 
-export function fetchExercises() {
+export const fetchExercises = () => {
   return dispatch => {
     return fetch(`${API_URL}/exercises`)
       .then(response => {
@@ -34,7 +33,7 @@ export function fetchExercises() {
       .then(exercises => dispatch(fetchExercisesSuccess(exercises)))
       .catch(error => dispatch(fetchExercisesFailure(error.message)));
   };
-}
+};
 
 // ------------------------------------
 // Selectors

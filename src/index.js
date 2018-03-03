@@ -14,6 +14,7 @@ import rootReducer from './modules';
 import App from './components/App';
 import Home from './containers/HomeContainer';
 import About from './containers/AboutContainer';
+import Login from './containers/LoginContainer';
 import { IntlActions } from 'react-redux-multilingual';
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
@@ -24,6 +25,7 @@ const routes = (
     <App>
       <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />
+      <Route path="/login" component={Login} />
     </App>
   </Router>
 );
