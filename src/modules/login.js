@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-//const API_URL = 'https://improv-api.herokuapp.com';
+// const API_URL = 'https://improv-api.herokuapp.com';
 const API_URL = 'http://localhost:5000';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -12,23 +12,20 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 const loginSuccess = user => {
   return {
     type: LOGIN_SUCCESS,
-    payload: user,
-    isAuthenticated: true
+    payload: user
   };
 };
 
 const loginFailure = errmessage => {
   return {
     type: LOGIN_FAILURE,
-    payload: errmessage,
-    isAuthenticated: false
+    payload: errmessage
   };
 };
 
 const logoutSuccess = () => {
   return {
-    type: LOGOUT_SUCCESS,
-    isAuthenticated: false
+    type: LOGOUT_SUCCESS
   };
 };
 
@@ -75,5 +72,25 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action = {}) {
-  return state;
+  switch (action.type) {
+  case LOGIN_SUCCESS:
+    return {
+      ...state,
+      user: {
+        username: action.payload.username,
+        email: action.payload.email
+      },
+      error: null,
+      isAuthenticated: true
+    };
+  case LOGIN_FAILURE:
+    return {
+      ...state,
+      user: null,
+      error: action.payload
+    };
+
+  default:
+    return state;
+  }
 }

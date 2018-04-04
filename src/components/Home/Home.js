@@ -27,6 +27,7 @@ class Home extends React.Component {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   componentWillReceiveProps(nextProps) {
     this.setState((prevState, nextProps) => {
       return {

@@ -51,25 +51,25 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case CONTRIBUTORS_FETCH_SUCCESS:
-      return {
-        ...state,
-        contributors: action.payload.map(el => ({
-          username: el.login,
-          contributions: el.contributions,
-          avatar: el.avatar_url,
-          url: el.html_url
-        })),
-        loaded: true
-      };
-    case CONTRIBUTORS_FETCH_FAILURE:
-      return {
-        ...state,
-        loaded: true
-      };
+  case CONTRIBUTORS_FETCH_SUCCESS:
+    return {
+      ...state,
+      contributors: action.payload.map(el => ({
+        username: el.login,
+        contributions: el.contributions,
+        avatar: el.avatar_url,
+        url: el.html_url
+      })),
+      loaded: true
+    };
+  case CONTRIBUTORS_FETCH_FAILURE:
+    return {
+      ...state,
+      loaded: true
+    };
 
-    default:
-      return state;
+  default:
+    return state;
   }
 }
 

@@ -1,5 +1,10 @@
 import { connect } from 'react-redux';
-import { logoutUser, loginUser } from '../modules/login';
+import {
+  logoutUser,
+  loginUser,
+  getUser,
+  isAuthenticated
+} from '../modules/login';
 import Login from '../components/Login';
 
 const mapDispatchToProps = {
@@ -7,13 +12,11 @@ const mapDispatchToProps = {
   loginUser: (username, password) => loginUser(username, password)
 };
 
-/*
 const mapStateToProps = state => {
-  const { isAuthenticated } = state.login.isAuthenticated;
   return {
-    isAuthenticated
+    user: getUser(state),
+    isAuthenticated: isAuthenticated(state)
   };
 };
-*/
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

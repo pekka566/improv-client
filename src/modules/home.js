@@ -2,7 +2,7 @@
 // Constants
 
 const API_URL = 'https://improv-api.herokuapp.com';
-//const API_URL = 'http://localhost:5000';
+// const API_URL = 'http://localhost:5000';
 
 const EXERCISES_FETCH_SUCCESS = 'home/EXERCISES_FETCH_SUCCESS';
 const EXERCISES_FETCH_FAILURE = 'home/EXERCISES_FETCH_FAILURE';
@@ -51,26 +51,26 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case EXERCISES_FETCH_SUCCESS:
-      return {
-        ...state,
-        exercises: action.payload.map(el => ({
-          id: el._id,
-          name: el.Name,
-          description: el.Description,
-          notice: el.Notice,
-          category: el.Category
-        })),
-        loaded: true
-      };
-    case EXERCISES_FETCH_FAILURE:
-      return {
-        ...state,
-        loaded: true
-      };
+  case EXERCISES_FETCH_SUCCESS:
+    return {
+      ...state,
+      exercises: action.payload.map(el => ({
+        id: el._id,
+        name: el.Name,
+        description: el.Description,
+        notice: el.Notice,
+        category: el.Category
+      })),
+      loaded: true
+    };
+  case EXERCISES_FETCH_FAILURE:
+    return {
+      ...state,
+      loaded: true
+    };
 
-    default:
-      return state;
+  default:
+    return state;
   }
 }
 
